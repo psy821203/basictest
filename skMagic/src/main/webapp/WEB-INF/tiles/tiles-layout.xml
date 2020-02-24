@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+		<!-- 공통레이아웃  -->
+        <definition name="default-layout" template="/WEB-INF/views/layout/default-layout.jsp">
+        		<put-attribute name="head" value="/WEB-INF/views/layout/head.jsp" />
+                <put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+                <put-attribute name="menu" value="/WEB-INF/views/layout/menu.jsp" />
+                <put-attribute name="body" value=""/>
+                <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+        </definition>
+        <!-- 팝업레이아웃 -->
+        <definition name="modal-layout" template="/WEB-INF/views/layout/modal-layout.jsp">
+                <put-attribute name="modal-content" value=""/>
+        </definition>
+        <!-- 로그인관련 레이아웃 -->
+        <definition name="login" template="/WEB-INF/views/layout/login-layout.jsp">
+	        <put-attribute name="content" value=""/>  
+	    </definition>
+        
+        <!-- 팝업 설정 -->
+        <definition name="modal/*/*" extends="modal-layout">
+                <put-attribute name="modal-content" value="/WEB-INF/views/{1}/{2}.jsp" />
+        </definition>
+        <definition name="modal/*/*/*" extends="modal-layout">
+                <put-attribute name="modal-content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+        </definition>
+        
+        <!-- 로그인관련 설정 -->
+        <definition name="login/*" extends="login">
+          <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+    	</definition>
+		<definition name="login/*/*" extends="login">
+          <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+    	</definition>
+    	
+        <!-- 공통 설정 -->
+        <definition name="*" extends="default-layout">
+                <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+        </definition>
+        <definition name="*/*" extends="default-layout">
+                <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+        </definition>
+        <definition name="*/*/*" extends="default-layout">
+                <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+        </definition>
+</tiles-definitions>
+
